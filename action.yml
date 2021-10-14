@@ -1,6 +1,6 @@
-name: slack - GitHub Actions Slack integration
-description: Notify Slack of GitHub Actions workflows, jobs and step status.
-author: satterly
+name: Message Slack - GitHub Actions Slack Integration with Custom Messages
+description: Notify Slack of GitHub Actions workflows, jobs and step status, based on act10ns/slack.
+author: mariobodemann
 inputs:
   status:
     description: Specify success, failure, cancelled or a custom status.
@@ -19,4 +19,4 @@ runs:
   main: 'dist/index.js'
 branding:
   icon: alert-circle
-  color: red
+  color: blue
