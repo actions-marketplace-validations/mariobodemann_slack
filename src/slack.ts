@@ -113,7 +113,7 @@ async function send(
     `job _${jobName}_ triggered by _${eventName}_ is _${jobStatus}_>* ` +
     `for <${refUrl}|\`${ref}\`>\n`
   }${title ? `<${diffUrl}|\`${diffRef}\`> - ${title}` : ''
-  }${message ? `\n\n*Message*\n${message}` : ''
+  }${message ? `\n\n*Message*\n${message}` : 'EOL'
   }`
 
   // add job steps, if provided
