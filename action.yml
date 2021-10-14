@@ -11,6 +11,9 @@ inputs:
   channel:
     description: Override default channel with different channel or username
     required: false
+  message:
+    description: Add a custom message to the notification
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

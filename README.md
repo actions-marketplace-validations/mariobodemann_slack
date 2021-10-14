@@ -59,6 +59,11 @@ use:
 **Note: To override the channel the Slack webhook URL must be an
 Incoming Webhook URL. See https://api.slack.com/faq#incoming_webhooks**
 
+#### `message` (optional)
+
+To add a custom message to the channel.
+
+
 ### Conditionals (`if`)
 
 To ensure the Slack message is sent even if the job fails add the
@@ -163,11 +168,13 @@ or
               status: ${{ job.status }}
               steps: ${{ toJson(steps) }}
               channel: '#workflows'
+              message: 'You rock!'
             if: always()
 
 The above "Docker Build and Push" workflow will appear in Slack as:
 
 <img src="./docs/images/example2.png" width="700" title="Slack Example #2">
+
 
 ## Troubleshooting
 
