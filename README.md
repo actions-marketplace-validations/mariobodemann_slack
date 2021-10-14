@@ -173,7 +173,7 @@ or
 
 The above "Docker Build and Push" workflow will appear in Slack as:
 
-<img src="./docs/images/example2.png" width="700" title="Slack Example #2">
+<img src="./docs/images/example1.png" width="700" title="Slack Example #2">
 
 
 ## Troubleshooting
