@@ -40,6 +40,7 @@ const jobSteps = {
   }
 }
 const channel = '#github-ci'
+const customMessage = 'custom message'
 
 // mock github context
 const dump = JSON.parse(readFileSync('./__tests__/fixtures/push.json', 'utf-8'))
@@ -83,7 +84,7 @@ test('push event to slack', async () => {
     .onAny()
     .reply(500)
 
-  const res = await send(url, jobName, jobStatus, jobSteps, channel)
+  const res = await send(url, jobName, jobStatus, jobSteps, channel, customMessage)
   await expect(res).toStrictEqual({text: {status: 'ok'}})
 
   expect(JSON.parse(mockAxios.history.post[0].data)).toStrictEqual({
@@ -99,7 +100,7 @@ test('push event to slack', async () => {
         author_icon: 'https://avatars0.githubusercontent.com/u/615057?v=4',
         mrkdwn_in: ['text'],
         text:
-          '*<https://github.com/act10ns/slack/actions/runs/100143423|Workflow _build-test_ job _CI Tests_ triggered by _push_ is _failure_>* for <https://github.com/act10ns/slack/commits/master|`master`>\n<https://github.com/act10ns/slack/compare/db9fe60430a6...68d48876e079|`68d48876`> - 4 commits',
+          '*<https://github.com/act10ns/slack/actions/runs/100143423|Workflow _build-test_ job _CI Tests_ triggered by _push_ is _failure_>* for <https://github.com/act10ns/slack/commits/master|`master`>\n<https://github.com/act10ns/slack/compare/db9fe60430a6...68d48876e079|`68d48876`> - 4 commits\n\ncustom message',
         fields: [
           {
             short: false,

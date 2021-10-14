@@ -9,6 +9,7 @@ const jobName = 'Build and Test'
 const jobStatus = 'Success'
 const jobSteps = {}
 const channel = '@override'
+const customMessage = 'custom message'
 
 // mock github context
 const dump = JSON.parse(readFileSync('./__tests__/fixtures/pull_request.json', 'utf-8'))
@@ -52,7 +53,7 @@ test('pull request event to slack', async () => {
     .onAny()
     .reply(500)
 
-  const res = await send(url, jobName, jobStatus, jobSteps, channel)
+  const res = await send(url, jobName, jobStatus, jobSteps, channel, customMessage)
   await expect(res).toStrictEqual({text: {status: 'ok'}})
 
   expect(JSON.parse(mockAxios.history.post[0].data)).toStrictEqual({
@@ -68,7 +69,7 @@ test('pull request event to slack', async () => {
         author_icon: 'https://avatars0.githubusercontent.com/u/615057?v=4',
         mrkdwn_in: ['text'],
         text:
-          '*<https://github.com/act10ns/slack/actions/runs/360703544|Workflow _build-test_ job _Build and Test_ triggered by _pull_request_ is _Success_>* for <https://github.com/act10ns/slack/pull/17|`#17`>\n<https://github.com/act10ns/slack/pull/17/files|`rename-to-slack`> - Rename to slack',
+          '*<https://github.com/act10ns/slack/actions/runs/360703544|Workflow _build-test_ job _Build and Test_ triggered by _pull_request_ is _Success_>* for <https://github.com/act10ns/slack/pull/17|`#17`>\n<https://github.com/act10ns/slack/pull/17/files|`rename-to-slack`> - Rename to slack\n\ncustom message',
         fields: [],
         footer: '<https://github.com/act10ns/slack|act10ns/slack> #760',
         footer_icon: 'https://github.githubassets.com/favicon.ico',

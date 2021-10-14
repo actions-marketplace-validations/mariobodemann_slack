@@ -1,8 +1,8 @@
 {
-  "name": "slack",
-  "version": "1.2.2",
+  "name": "message-slack",
+  "version": "0.0.3",
   "private": true,
-  "description": "Notify Slack of GitHub Actions job and step status.",
+  "description": "Notify Slack of GitHub Actions job and step status and messages.",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",

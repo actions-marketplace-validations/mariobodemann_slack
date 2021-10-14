@@ -23,7 +23,7 @@ async function send(
   jobStatus: string,
   jobSteps: object,
   channel?: string,
-  message?: string
+  customMessage?: string
 ): Promise<IncomingWebhookResult> {
   const eventName = process.env.GITHUB_EVENT_NAME
   const workflow = process.env.GITHUB_WORKFLOW
@@ -112,9 +112,7 @@ async function send(
     `*<${workflowUrl}|Workflow _${workflow}_ ` +
     `job _${jobName}_ triggered by _${eventName}_ is _${jobStatus}_>* ` +
     `for <${refUrl}|\`${ref}\`>\n`
-  }${title ? `<${diffUrl}|\`${diffRef}\`> - ${title}` : ''
-  }${message ? `\n\n*Message*\n${message}` : 'EOL'
-  }`
+  }${title ? `<${diffUrl}|\`${diffRef}\`> - ${title}` : ''}${customMessage ? `\n\n${customMessage}` : ''}`
 
   // add job steps, if provided
   const checks: string[] = []

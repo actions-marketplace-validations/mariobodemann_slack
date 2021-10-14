@@ -9,6 +9,7 @@ const jobName = 'Build and Test'
 const jobStatus = 'Success'
 const jobSteps = {}
 const channel = '@override'
+const customMessage = 'custom message'
 
 // mock github context
 const dump = JSON.parse(readFileSync('./__tests__/fixtures/workflow_dispatch.json', 'utf-8'))
@@ -53,7 +54,7 @@ test('workflow_dispatch event to slack', async () => {
     .onAny()
     .reply(500)
 
-  const res = await send(url, jobName, jobStatus, jobSteps, channel)
+  const res = await send(url, jobName, jobStatus, jobSteps, channel, customMessage)
   await expect(res).toStrictEqual({text: {status: 'ok'}})
 
   expect(JSON.parse(mockAxios.history.post[0].data)).toStrictEqual({
@@ -69,7 +70,7 @@ test('workflow_dispatch event to slack', async () => {
         author_icon: '',
         mrkdwn_in: ['text'],
         text:
-          '*<https://github.com/act10ns/slack/actions/runs/360767681|Workflow _manual-test_ job _Build and Test_ triggered by _workflow_dispatch_ is _Success_>* for <https://github.com/act10ns/slack/commits/master|`master`>\n',
+          '*<https://github.com/act10ns/slack/actions/runs/360767681|Workflow _manual-test_ job _Build and Test_ triggered by _workflow_dispatch_ is _Success_>* for <https://github.com/act10ns/slack/commits/master|`master`>\n\n\ncustom message',
         fields: [],
         footer: '<https://github.com/act10ns/slack|act10ns/slack> #6',
         footer_icon: 'https://github.githubassets.com/favicon.ico',
